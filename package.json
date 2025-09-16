@@ -1,0 +1,19 @@
+{
+  "name": "api-screenshot",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Matt Born",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "deploy": "gcloud functions deploy screenshot --allow-unauthenticated --memory=1G --no-gen2 --runtime=nodejs20 --trigger-http",
+    "dev": "npx functions-framework --target=screenshot",
+    "gcp-build": "node node_modules/puppeteer/install.mjs",
+    "test": "curl -X POST https://us-central1-samantha-374622.cloudfunctions.net/screenshot -H \"Content-Type: application/json\" -d '{\"url\": \"https://google.com\"}'"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^4.0.0",
+    "puppeteer": "^24.21.0"
+  }
+}
